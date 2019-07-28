@@ -10,20 +10,44 @@ import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 class App extends React.Component {
 	constructor(props, context) {
 		super(props,context);
-		this.state = {};
+		this.state = {
+			email: "",
+			newsDisplay:"block",
+			notifDisplay:""
+		};
+		this.onChange = this.onChange.bind(this);
+		this.displayChange = this.displayChange.bind(this);
+		this.notifPanelChange = this.notifPanelChange.bind(this);
 
 	}
+
+	onChange(event) {
+		let input = event.target;
+		this.setState({email: input});
+
+	}
+
+	displayChange(event) {
+		this.setState({newsDisplay: "none"});
+
+	}
+
+	notifPanelChange(event) {
+		this.setState({notifDisplay: "none"});
+	}
+
 
 	render() {
 		return(
 			<div className="main-page">
+				
 
-				<div className="notif-panel">
+				<div className="notif-panel" style={{display: this.state.notifDisplay}}>
 
 				<p className="top-panel">By accessing and using this website, you acknowledge that you have read and<br />
 				understand our <a href="#"> Cookie Policy </a>, <a href="#">Privacy Policy</a>, and our <a href="#">Terms of Service</a>.
 				</p>
-				<button className="btn btn-primary" href="#">Got it</button>
+				<button className="btn btn-primary" onClick={this.notifPanelChange}>Got it</button>
 
 
 				</div>
@@ -35,7 +59,7 @@ class App extends React.Component {
 				<h3>Consult, Design, and Develop Websites</h3>
 				<p>Have something great in mind? Feel free to contact me.</p>
 				<p>I'll help you to make it happen.</p>
-				<div type="button" className="contact-button" href="#">LET'S CONTACT</div>
+				<div type="button" className="contact-button" href="#" style={{display:"block"}}>LET'S CONTACT</div>
 				</div>
 				</div>
 
@@ -138,11 +162,26 @@ class App extends React.Component {
 					</div>
 
 				</div>
+				
+				<div className="newsletter-panel" style={{display:this.state.newsDisplay}}>
+				<div className="close" onClick={this.displayChange}>&times;</div>
+				<h3 className="newsletter">Get latest updates in web technologies</h3>
+				<p>I write articles related to web technologies, such as design trends, development
+				tools, UI/UX case studies and reviews, and more. Sign up to my newsletter to get
+				them all.</p>
+
+				<div className="form form-email" >
+					<input className="form-control sized" placeholder="Email Address" type="text" name="email" onChange={this.onChange} />
+					<button className="btn orange">Count me in!</button>
+				</div>
+				</div>
+			
 
 				<div className="page-footer">
 					<p className="footer">&copy; 2019 Mirdan Syahid, All rights reserved.</p>
-				</div>
+				
 
+				</div>
 			
 			</div>
 

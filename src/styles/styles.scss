@@ -37,6 +37,18 @@ button {
   
 }
 
+button.orange {
+  background-color: orangered;
+  color: white;
+  height: 2.5em;
+  width: 8em;
+  
+
+}
+
+
+
+
 article {
   //margin-top: 2em;
 }
@@ -59,6 +71,13 @@ h3 {
   .title-header {
     margin:13em;
   }
+  
+}
+
+h3.newsletter {
+
+  margin-top: 2em;
+  //border: border(white);
 }
 
 
@@ -77,6 +96,10 @@ a {
 
 i { 
   margin-top: 0.7em;
+}
+
+input.sized {
+  width: 60%;
 }
 
 
@@ -195,8 +218,45 @@ div {
 
   .page-footer {
     background-color: #002f4b;
-    height: 5m;
+    height: 5em;
     padding-left: 3em;
     padding-top: 2em;
   }
+
+    
+
+  .newsletter-panel {
+    padding-top: 0em;
+    padding-left: 1em;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    height: 15em;
+    max-width: 44em;
+    background-color: RGBA(0,139,212,0.76)
+  
+  
+  }
+
+  .close {
+    margin-top: 0em;
+    padding: 0em;
+    color: white;
+    //border: 1px solid white;
+    padding:0.5em;
+    
+  }
+
+  .form-email {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    z-index: 1;
+    padding-top: 0em;
+    padding-left:0em;
+  }
+
+
+  
 }
