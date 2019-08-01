@@ -5,15 +5,6 @@ $darkorange-theme: ​#cc6600;
 $smokegrey-theme: ​#e5e5e5;
 
 
-h1 {
-    color: Green;
-    text-align: center;
-    margin: auto;
-    font-size: 12em;
-    padding-top: 20%;
-  
-  }
-
 @function border($color) {
   @return 3px solid $color
 }
@@ -64,6 +55,17 @@ h1 {
   }
 }
 
+@mixin slideAnimation($position,  $name, $duration, $direction) {
+  position: $position;
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-direction: $direction;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+
+
+}
+
 #app {
   padding: 0em;
 }
@@ -102,7 +104,7 @@ button {
 }
 
 button.orange {
-  background-color: rgb(248, 184, 7);
+  background-color: orange;
   color: white;
   height: 2.5em;
   min-width: 8em;
@@ -132,9 +134,17 @@ h3 {
   
 }
 
-h2.newsletter {
-  
+h3.boldfont-news {
+  font-family: arial;
+  font-weight: bold;
   margin-top: 1em;
+  //border: border(white);
+}
+
+h3.boldfont-header {
+  font-family: arial;
+  font-weight: bold;
+  margin-top: 0em;
   //border: border(white);
 }
 
@@ -147,6 +157,7 @@ h2.newsletter {
 }
 .center-text {
   text-align: center;
+  margin-bottom: 0em;
 }
 a {
   color: $darkblue-theme;
@@ -193,14 +204,9 @@ div {
     flex-wrap: wrap;
   
   }
-
+  
   .notif-panel-clicked {
-    position: relative;
-    animation-name: notif-frame;
-    animation-duration: 1s;
-    animation-direction: reverse;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+    @include slideAnimation(relative,notif-frame , 1s , reverse );
     margin: 0em;
     padding: 0em;
     //border: border(blue)
@@ -321,34 +327,21 @@ div {
     left:0;
     min-height: 15em;
     max-width: 640px;
-    background-color: RGBA(0,139,212,0.76)
+    background-color: RGBA(0,139,212,0.85)
   
   
   }
 
   .newsletter-slide-up {
-
-    animation-name: news-frame;
-    animation-duration: 2s;
-    animation-direction: normal;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+    @include slideAnimation(fixed, news-frame , 2s , normal );
     margin: 0em;
     padding-left: 2em;
     padding-right: 0.5em;
-      //border: border(blue)
-       
-    
-
+      //border: border(blue) 
   }
 
   .newsletter-slide-down {
-
-    animation-name: news-frame-close;
-    animation-duration: 2s;
-    animation-direction: normal;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+    @include slideAnimation(fixed, news-frame-close , 2s , normal );
     margin: 0em;
     padding-left: 2em;
     padding-right: 0.5em;
@@ -367,8 +360,6 @@ div {
     height: 15em;
     max-width: 640px;
     background-color: RGBA(0,139,212,0.76)
- 
-
   }
 
   .close {
@@ -388,7 +379,4 @@ div {
     padding-left:0em;
     margin-right: 2.5em;
   }
-
-
-  
 }
