@@ -18,40 +18,98 @@ h1 {
   @return 3px solid $color
 }
 
-#app {
-  padding: 0em;
+@keyframes notif-frame {
+  from {
+    min-height: 5em;
+    flex-wrap: wrap;
+    justify-content: center;
+    left:0px;
+    top:-80px;
+  }
+  to {
+    min-height: 5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    left:0px; 
+    top:0px;
+  }
 }
 
 
 
+@keyframes news-frame {
+  from {
+    min-height: 15em;
+    left:0px;
+    bottom:-300px;
+  }
+  to {
+    min-height: 15em;
+    left:0px; 
+    bottom:0px;
+  }
+}
+
+@keyframes news-frame-close {
+  from {
+    min-height: 15em;
+    left:0px;
+    bottom:0px;
+  }
+  to {
+    min-height: 15em;
+    left:0px; 
+    bottom:-300px;
+  }
+}
+
+#app {
+  padding: 0em;
+}
+
+body {
+  padding-bottom: 0em;
+}
+
+
 p.footer{
   text-align: left;
+  margin-left: 0em;
+  padding-right: 0em;
   color: white;
 
+}
+
+p.newsletter-par {
+  font-size: 16px;
+  margin-right: 2.5em;
+  //border: border(red);
+}
+
+p.top-panel-text {
+  width: 650px;
+  //border: border(red);
+  text-align: left;
+  color: black;
 }
 
 button {
   margin-right: 2em;
   height: 3em;
-  width: 4em;
+  width: 60px;
   
 }
 
 button.orange {
-  background-color: orangered;
+  background-color: rgb(248, 184, 7);
   color: white;
   height: 2.5em;
-  width: 8em;
+  min-width: 8em;
   
 
 }
 
-
-
-
-article {
-  //margin-top: 2em;
-}
 
 h4 {
   text-align: left;
@@ -74,9 +132,9 @@ h3 {
   
 }
 
-h3.newsletter {
-
-  margin-top: 2em;
+h2.newsletter {
+  
+  margin-top: 1em;
   //border: border(white);
 }
 
@@ -85,6 +143,7 @@ h3.newsletter {
   text-align: left;
   margin-right: 1em;
   float: left;
+  color: black;
 }
 .center-text {
   text-align: center;
@@ -99,7 +158,10 @@ i {
 }
 
 input.sized {
-  width: 60%;
+  width: 19.55em;
+  flex-grow: 3;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 
@@ -124,18 +186,40 @@ div {
     //border: border(brown);
     background-color: #e5e5e5;
     min-height: 5em;
-    
+    position: fixed;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    flex-wrap: wrap;
+  
   }
 
+  .notif-panel-clicked {
+    position: relative;
+    animation-name: notif-frame;
+    animation-duration: 1s;
+    animation-direction: reverse;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    margin: 0em;
+    padding: 0em;
+    //border: border(blue)
+     
+  }
 
+  .notif-panel-before-clicked {
+    margin: 0em;
+    padding: 0em;
+    top: 0;
+    //border: border(red);
+ 
+  }
+  
   .background-color {
     background-color: rgba(0, 74, 117, 0.5);
-    height: 44em;
+    height: 54em;
     margin: 0em;
-    padding-top:1em;
+    padding:0em;
     color: white;
   }
 
@@ -144,12 +228,14 @@ div {
     background-repeat: no-repeat;
     height: 70px;
     width: 70px;
+    //border: border(green);
+    margin: 5em 1em 1em 1em;
   }
   .img {
     //background-color: rgba(0, 0, 255, 0.8);
     max-width: 1920px;
     background-image: url('../images/work-desk-pict.jpg');
-    min-height: 44em;
+    min-height: 54em;
     padding: 0em;
     
   }
@@ -221,40 +307,86 @@ div {
     height: 5em;
     padding-left: 3em;
     padding-top: 2em;
+    margin-bottom: 0em;
+
   }
 
     
 
   .newsletter-panel {
-    padding-top: 0em;
-    padding-left: 1em;
+    padding: 0em;
     color: white;
     position: fixed;
     bottom: 0;
     left:0;
-    height: 15em;
-    max-width: 44em;
+    min-height: 15em;
+    max-width: 640px;
     background-color: RGBA(0,139,212,0.76)
   
   
   }
 
+  .newsletter-slide-up {
+
+    animation-name: news-frame;
+    animation-duration: 2s;
+    animation-direction: normal;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    margin: 0em;
+    padding-left: 2em;
+    padding-right: 0.5em;
+      //border: border(blue)
+       
+    
+
+  }
+
+  .newsletter-slide-down {
+
+    animation-name: news-frame-close;
+    animation-duration: 2s;
+    animation-direction: normal;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    margin: 0em;
+    padding-left: 2em;
+    padding-right: 0.5em;
+    //border: border(blue)
+
+  }
+
+  .newsletter-hidden {
+    padding-top: 0em;
+    padding-left: 2em;
+    padding-right: 0.5em;
+    color: white;
+    position: fixed;
+    bottom:        0;
+    left:0;
+    height: 15em;
+    max-width: 640px;
+    background-color: RGBA(0,139,212,0.76)
+ 
+
+  }
+
   .close {
-    margin-top: 0em;
+    margin: 0.5em;
     padding: 0em;
     color: white;
     //border: 1px solid white;
-    padding:0.5em;
     
   }
 
   .form-email {
     display: flex;
     flex-direction: row;
-    flex: 1;
-    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
     padding-top: 0em;
     padding-left:0em;
+    margin-right: 2.5em;
   }
 
 

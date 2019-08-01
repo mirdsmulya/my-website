@@ -1,9 +1,10 @@
 import React, {propTypes} from 'react';
 import { render } from 'react-dom';
 import './styles/styles.scss';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';	
 import '../node_modules/toastr/build/toastr.min.css';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+import { get } from 'http';
 
 
 
@@ -12,12 +13,43 @@ class App extends React.Component {
 		super(props,context);
 		this.state = {
 			email: "",
-			newsDisplay:"block",
-			notifDisplay:""
+			newsDisplay:"none",
+			newsClass:"newsletter-panel newsletter-slide-up",
+			notifDisplay:"",
+			notifClassName: "notif-panel-before-clicked"
 		};
 		this.onChange = this.onChange.bind(this);
 		this.displayChange = this.displayChange.bind(this);
 		this.notifPanelChange = this.notifPanelChange.bind(this);
+		this.handleScrollToElement = this.handleScrollToElement.bind(this);
+
+	}
+
+	componentDidMount() {
+		debugger;
+		window.addEventListener('scroll', this.handleScrollToElement);
+		
+	}
+
+	isBottom(el) {
+		let maxHeight = window.innerHeight;
+		let getBound = Object.assign({}, this.state.actualHeight);
+		return el.getBoundingClientRect().bottom <= 1250;
+	}
+	/** 
+	componentWillUnmount() {
+		debugger;
+		window.removeEventListener('scroll', this.handleScrollToElement);
+	} **/
+
+	handleScrollToElement(event) {
+		const wrappedElement = document.body;
+		this.setState({transform: wrappedElement.getBoundingClientRect().bottom});
+		debugger;
+		if (this.isBottom(wrappedElement)) {
+			this.setState({newsDisplay: "block"});
+			document.removeEventListener('scroll', this.trackScrolling);
+		}
 
 	}
 
@@ -28,38 +60,49 @@ class App extends React.Component {
 	}
 
 	displayChange(event) {
-		this.setState({newsDisplay: "none"});
-
+		this.setState({newsClass: "newsletter-hidden newsletter-slide-down"});
+		this.intervalID = setTimeout( () => {
+			this.setState({newsClass: "newsletter-panel newsletter-slide-up"},{newsClass: "none"});
+		}, 600000 );
 	}
 
 	notifPanelChange(event) {
-		this.setState({notifDisplay: "none"});
+		this.setState({notifClassName:"notif-panel-clicked"});
 	}
 
 
 	render() {
+		let data = this.state.transform;
+		let height = this.state.actualHeight;
+		debugger;
+
 		return(
 			<div className="main-page">
 				
-
-				<div className="notif-panel" style={{display: this.state.notifDisplay}}>
-
-				<p className="top-panel">By accessing and using this website, you acknowledge that you have read and<br />
-				understand our <a href="#"> Cookie Policy </a>, <a href="#">Privacy Policy</a>, and our <a href="#">Terms of Service</a>.
-				</p>
-				<button className="btn btn-primary" onClick={this.notifPanelChange}>Got it</button>
-
-
-				</div>
 				<div className="img center-text">
+
 				<div className="background-color">
-				<div className="logo"></div>
-				<div className="text-header">
-				<h3 className="title-header">Hello I'm Mirdan Syahid</h3>
-				<h3>Consult, Design, and Develop Websites</h3>
-				<p>Have something great in mind? Feel free to contact me.</p>
-				<p>I'll help you to make it happen.</p>
-				<div type="button" className="contact-button" href="#" style={{display:"block"}}>LET'S CONTACT</div>
+
+					<div className={this.state.notifClassName}>
+					<div className="notif-panel">
+
+					<p className="top-panel-text">By accessing and using this website, you acknowledge that you have read and
+					understand our <a href="#"> Cookie Policy </a>, <a href="#">Privacy Policy</a>, and our <a href="#">Terms of Service</a>.
+					</p>
+					<button className="btn btn-primary" onClick={this.notifPanelChange}>Got it</button>
+	
+	
+					</div>
+
+					<div className=""></div>
+					<div className="logo"></div>
+					<div className="text-header">
+					<h3 className="title-header">Hello I'm Mirdan Syahid</h3>
+					<h3>Consult, Design, and Develop Websites</h3>
+					<p>Have something great in mind? Feel free to contact me.</p>
+					<p>I'll help you to make it happen.</p>
+					<div type="button" className="contact-button" href="#" style={{display:"block"}}>LET'S CONTACT</div>
+					</div>
 				</div>
 				</div>
 
@@ -162,17 +205,18 @@ class App extends React.Component {
 					</div>
 
 				</div>
-				
-				<div className="newsletter-panel" style={{display:this.state.newsDisplay}}>
+	
+				<div className={this.state.newsClass} style={{display:this.state.newsDisplay}}>
 				<div className="close" onClick={this.displayChange}>&times;</div>
-				<h3 className="newsletter">Get latest updates in web technologies</h3>
-				<p>I write articles related to web technologies, such as design trends, development
+				<h2 className="newsletter">Get latest updates in web technologies</h2>
+				<p className="newsletter-par">I write articles related to web technologies, such as design trends, development
 				tools, UI/UX case studies and reviews, and more. Sign up to my newsletter to get
 				them all.</p>
-
+		
 				<div className="form form-email" >
 					<input className="form-control sized" placeholder="Email Address" type="text" name="email" onChange={this.onChange} />
 					<button className="btn orange">Count me in!</button>
+			
 				</div>
 				</div>
 			
