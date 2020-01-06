@@ -61,7 +61,7 @@
     "react-addons-test-utils": "15.0.2",
     "rimraf": "2.5.2",
     "run-p": "0.0.0",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^7.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0",
