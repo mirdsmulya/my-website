@@ -16,7 +16,8 @@ class App extends React.Component {
 			newsDisplay:"none",
 			newsClass:"newsletter-panel newsletter-slide-up",
 			notifDisplay:"",
-			notifClassName: "notif-panel-before-clicked"
+			notifClassName: "notif-panel-before-clicked",
+			buttonPanelDisplay: "btn btn-primary button-panel"
 		};
 		this.onChange = this.onChange.bind(this);
 		this.displayChange = this.displayChange.bind(this);
@@ -62,7 +63,9 @@ class App extends React.Component {
 	}
 
 	notifPanelChange(event) {
-		this.setState({notifClassName:"notif-panel-clicked"});
+		this.setState({notifClassName:"notif-panel-clicked",
+						buttonPanelDisplay:"hide"
+	});
 	}
 
 
@@ -81,7 +84,7 @@ class App extends React.Component {
 						<p className="top-panel-text">By accessing and using this website, you acknowledge that you have read and
 						understand our <a href="#"> Cookie Policy </a>, <a href="#">Privacy Policy</a>, and our <a href="#">Terms of Service</a>.
 						</p>
-						<button className="btn btn-primary" onClick={this.notifPanelChange}>Got it</button>
+						<button className={this.state.buttonPanelDisplay} onClick={this.notifPanelChange}>Got it</button>
 	
 	
 					</div>
